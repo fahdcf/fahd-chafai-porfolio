@@ -1,6 +1,11 @@
-<app-site-chrome></app-site-chrome>
+<app-site-chrome [activeSection]="activeSection()"></app-site-chrome>
 
-<main class="portfolio-page">
-  <app-hero-section></app-hero-section>
-  <app-about-section></app-about-section>
+<main class="portfolio-page" [class.show-about]="activeSection() === 'about'">
+  <app-hero-section class="presentation-layer home-layer"></app-hero-section>
+  <app-about-section class="presentation-layer about-layer" [isActive]="activeSection() === 'about'"></app-about-section>
 </main>
+
+<div class="scroll-activators" aria-hidden="true">
+  <section id="home" class="scroll-point"></section>
+  <section id="about" class="scroll-point"></section>
+</div>

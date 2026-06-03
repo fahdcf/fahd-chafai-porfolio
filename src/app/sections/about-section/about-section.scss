@@ -32,8 +32,18 @@
   z-index: -2;
   width: 100%;
   height: 100%;
+  opacity: 0;
   object-fit: cover;
   object-position: center top;
+  transform: translateY(42px) scale(1.035);
+  transition:
+    opacity 760ms ease,
+    transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about.about-visible .about-background {
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .about-terrain {
@@ -71,6 +81,15 @@
       transparent 87px
     );
   opacity: 0.78;
+  transform: translateY(-60%);
+  transition:
+    opacity 720ms ease,
+    transform 980ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about.about-visible .transition-gate {
+  opacity: 0.38;
+  transform: translateY(0);
 }
 
 .transition-gate::after {
@@ -285,6 +304,10 @@
   font-weight: 600;
   letter-spacing: 0.11em;
   text-transform: uppercase;
+  transition:
+    opacity 620ms ease,
+    transform 860ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 860ms cubic-bezier(0.16, 1, 0.3, 1);
 
   span {
     font-style: italic;
@@ -307,6 +330,10 @@ h2 {
   text-shadow:
     0 0 18px rgba(255, 255, 255, 0.18),
     0 0 34px rgba(139, 81, 255, 0.16);
+  transition:
+    opacity 700ms ease,
+    transform 980ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 980ms cubic-bezier(0.16, 1, 0.3, 1);
 
   strong {
     color: var(--purple-2);
@@ -322,6 +349,9 @@ h2 {
   margin: 30px 0 37px;
   background: linear-gradient(90deg, var(--purple), rgba(139, 81, 255, 0));
   box-shadow: 0 0 15px rgba(139, 81, 255, 0.5);
+  transition:
+    opacity 620ms ease,
+    transform 860ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .about-cards {
@@ -341,6 +371,30 @@ h2 {
     0 26px 55px rgba(0, 0, 0, 0.31),
     inset 0 0 30px rgba(255, 255, 255, 0.025);
   backdrop-filter: blur(8px);
+  opacity: 0;
+  transform: translateY(84px) scale(0.96);
+  transition:
+    opacity 680ms ease,
+    transform 950ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 950ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-two {
+  transition-delay: 70ms;
+}
+
+.card-three {
+  transition-delay: 140ms;
+}
+
+.card-four {
+  transition-delay: 210ms;
+}
+
+.about.about-visible .about-card {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0) scale(1);
 }
 
 .card-index {
@@ -430,107 +484,12 @@ h2 {
   }
 }
 
-@supports (animation-timeline: view()) {
-  .transition-gate {
-    animation: gate-scan both linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 36%;
-  }
-
-  .about-background {
-    animation: background-drift both linear;
-    animation-timeline: view();
-    animation-range: entry 0% cover 70%;
-  }
-
-  .intro-line,
-  h2,
-  .title-rule {
-    animation: copy-enter both cubic-bezier(0.16, 1, 0.3, 1);
-    animation-timeline: view();
-    animation-range: entry 8% cover 36%;
-  }
-
-  .about-card {
-    animation: card-rise both cubic-bezier(0.16, 1, 0.3, 1);
-    animation-timeline: view();
-  }
-
-  .card-one {
-    animation-range: entry 18% cover 43%;
-  }
-
-  .card-two {
-    animation-range: entry 22% cover 47%;
-  }
-
-  .card-three {
-    animation-range: entry 26% cover 51%;
-  }
-
-  .card-four {
-    animation-range: entry 30% cover 55%;
-  }
-}
-
-@keyframes gate-scan {
-  from {
-    opacity: 1;
-    transform: translateY(-55%);
-  }
-
-  to {
-    opacity: 0.38;
-    transform: translateY(0);
-  }
-}
-
-@keyframes background-drift {
-  from {
-    opacity: 0.2;
-    transform: translateY(36px) scale(1.025);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes terrain-rise {
-  from {
-    opacity: 0;
-    transform: translateY(42%) scale(1.04);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-@keyframes copy-enter {
-  from {
-    opacity: 0;
-    transform: translateY(36px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes card-rise {
-  from {
-    opacity: 0;
-    transform: translateY(78px) scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.about:not(.about-visible) .intro-line,
+.about:not(.about-visible) h2,
+.about:not(.about-visible) .title-rule {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(46px);
 }
 
 @media (max-width: 1360px) {

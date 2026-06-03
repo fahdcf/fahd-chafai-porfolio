@@ -30,35 +30,14 @@
     linear-gradient(90deg, transparent, rgba(139, 81, 255, 0.16), transparent);
   content: "";
   opacity: 0.8;
+  transition:
+    height 760ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 520ms ease;
 }
 
-@supports (animation-timeline: view()) {
-  .hero-stage {
-    animation: hero-exit both linear;
-    animation-timeline: view();
-    animation-range: exit 0% exit 78%;
-  }
-
-  .hero::after {
-    animation: portal-glow both linear;
-    animation-timeline: view();
-    animation-range: exit 0% exit 85%;
-  }
-}
-
-@keyframes hero-exit {
-  to {
-    filter: blur(5px);
-    opacity: 0.35;
-    transform: translateY(-42px) scale(0.985);
-  }
-}
-
-@keyframes portal-glow {
-  to {
-    height: 220px;
-    opacity: 1;
-  }
+:host-context(.show-about) .hero::after {
+  height: 240px;
+  opacity: 1;
 }
 
 .side-rail {
@@ -253,6 +232,10 @@
   width: min(61vw, 1015px);
   min-width: 760px;
   pointer-events: none;
+  transition:
+    opacity 760ms ease,
+    transform 980ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 980ms cubic-bezier(0.16, 1, 0.3, 1);
 
   img {
     display: block;
@@ -279,6 +262,10 @@
     0 24px 50px rgba(0, 0, 0, 0.32),
     inset 0 0 30px rgba(255, 255, 255, 0.025);
   backdrop-filter: blur(18px) saturate(1.2);
+  transition:
+    opacity 540ms ease,
+    transform 780ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 780ms cubic-bezier(0.16, 1, 0.3, 1);
 
   p {
     margin: 17px 44px 0 0;
@@ -353,6 +340,10 @@
   left: 86px;
   z-index: 4;
   width: 708px;
+  transition:
+    opacity 680ms ease,
+    transform 900ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 900ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .intro-line {
@@ -486,6 +477,10 @@ h1 {
     0 25px 56px rgba(0, 0, 0, 0.24),
     inset 0 0 28px rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(7px);
+  transition:
+    opacity 620ms ease,
+    transform 880ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 880ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .expertise-item {
@@ -971,4 +966,28 @@ h1 {
 .hero-stage > .connect-button,
 .hero-stage > .page-dots {
   display: none;
+}
+
+:host-context(.show-about) .hero-copy {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-46px) scale(0.96);
+}
+
+:host-context(.show-about) .visual-wrap {
+  opacity: 0;
+  filter: blur(18px) brightness(0.52);
+  transform: translateY(38px) scale(1.08) rotateZ(-2deg);
+}
+
+:host-context(.show-about) .status-card {
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateX(68px) translateY(-18px) scale(0.86);
+}
+
+:host-context(.show-about) .expertise-card {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(74px) scale(0.94);
 }
